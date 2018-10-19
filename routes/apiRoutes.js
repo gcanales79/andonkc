@@ -162,5 +162,81 @@ module.exports = function (app) {
     })
   })
 
+  //Dar de alta maquinas
+  app.post("/api/maquinas", (req, res) => {
+    db.Maquina.create({
+      maquina: req.body.maquina
+    }).then(data => {
+      res.json(data)
+    }).catch(function (err) {
+      console.log(err)
+      res.json(err)
+    })
+  })
+
+  //Obtener las maquinas
+  app.get("/api/maquinas", (req, res) => {
+    db.Maquina.findAll({
+      order:[
+        ["maquina","ASC"]
+      ]
+    }).then(data => {
+      res.json(data)
+    }).catch(function (err) {
+      console.log(err)
+    })
+  })
+
+  //Borrar maquina
+  app.delete("/borrar/maquina/:id", (req,res)=>{
+    db.Maquina.destroy({
+      where:{
+        id:req.params.id
+      }
+    }).then(data=>{
+      res.json(data)
+    }).catch(function(err){
+      console.log(err)
+    })
+  })
+
+  //Dar de alta falla
+  app.post("/api/falla", (req, res) => {
+    db.Falla.create({
+      falla: req.body.falla
+    }).then(data => {
+      res.json(data)
+    }).catch(function (err) {
+      console.log(err)
+      res.json(err)
+    })
+  })
+
+  //Obtener las falla
+  app.get("/api/falla", (req, res) => {
+    db.Falla.findAll({
+      order:[
+        ["falla","ASC"]
+      ]
+    }).then(data => {
+      res.json(data)
+    }).catch(function (err) {
+      console.log(err)
+    })
+  })
+
+  //Borrar falla
+  app.delete("/borrar/falla/:id", (req,res)=>{
+    db.Falla.destroy({
+      where:{
+        id:req.params.id
+      }
+    }).then(data=>{
+      res.json(data)
+    }).catch(function(err){
+      console.log(err)
+    })
+  })
+
 };
 
